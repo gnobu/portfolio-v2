@@ -1,0 +1,56 @@
+.projects {
+    display: grid;
+    gap: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 47%));
+    justify-content: space-between;
+}
+
+.project {
+    position: relative;
+}
+
+.project_image {
+    width: 100%;
+    height: auto;
+}
+
+.project_year {
+    position: absolute;
+    top: 1rem;
+    left: .5rem;
+    font-size: 48px;
+    letter-spacing: -0.41px;
+    color: #FFFFFF;
+    mix-blend-mode: overlay;
+}
+
+.project_overlay {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #11141459;
+    color: #FFFFFF;
+
+    visibility: hidden;
+}
+
+.project:hover .project_overlay,
+.project:focus-within .project_overlay {
+    visibility: visible;
+}
+
+.project_arrow {
+    border: 1px solid #FFFFFF;
+}
+
+.project_arrow:hover {
+    background-color: var(--bg-secondary);
+}

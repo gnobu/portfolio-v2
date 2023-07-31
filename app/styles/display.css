@@ -1,0 +1,123 @@
+/* UTILITY DISPLAY */
+.flex {
+    display: flex;
+}
+
+.jst-btwn {
+    justify-content: space-between;
+}
+
+.jst-around {
+    justify-content: space-around;
+}
+
+.jst-even {
+    justify-content: space-evenly;
+}
+
+.jst-center {
+    justify-content: center;
+}
+
+.jst-end {
+    justify-content: end;
+}
+
+.jst-f-end {
+    justify-content: flex-end;
+}
+
+.f-gap-p5 {
+    display: flex;
+    gap: .5rem;
+}
+
+.f-gap-1 {
+    display: flex;
+    gap: 1rem;
+}
+
+.f-gap-2 {
+    display: flex;
+    gap: 2rem;
+}
+
+.f-gap-3 {
+    display: flex;
+    gap: 3rem;
+}
+
+.gap-p25 {
+    gap: .25rem;
+}
+
+.gap-p5 {
+    gap: .5rem;
+}
+
+.gap-1 {
+    gap: 1rem;
+}
+
+.gap-2 {
+    gap: 2rem;
+}
+
+.gap-3 {
+    gap: 3rem;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.f-rev {
+    flex-direction: row-reverse;
+}
+
+.f-col-rev {
+    flex-direction: column-reverse;
+}
+
+.al-center {
+    align-items: center;
+}
+
+.al-start {
+    align-items: start;
+}
+
+.al-end {
+    align-items: end;
+}
+
+.al-base-end {
+    align-items: baseline;
+}
+
+.centered-flex {
+    align-items: center;
+    justify-content: center;
+}
+
+.f-grow {
+    flex-grow: 1;
+}
+
+.f-wrap {
+    flex-wrap: wrap;
+}
+
+.centered-grid {
+    display: grid;
+    place-content: center;
+}
+
+.blk {
+    display: block;
+}
+
+.ln-flex {
+    display: inline-flex;
+}

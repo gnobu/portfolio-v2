@@ -1,0 +1,294 @@
+@import url("./table.css");
+@import url("./form.css");
+@import url("./display.css");
+@import url("./colors.css");
+@import url("./positions.css");
+@import url("./typography.css");
+
+@import url('satoshi.css');
+@import url('Nohemi-Regular.css');
+
+:root {
+    --color-primary: #343B3B;
+    --color-secondary: #111414;
+    --color-tertiary: #EFEFEF;
+    --color-accent: #11141480;
+    --color-border: #737575;
+    --color-error: #FE1242;
+
+    --navbar-blur: #EFEFEF3F;
+    --bg-primary: #EFEFEF;
+    --bg-secondary: #0000000f;
+    --bg-tertiary: #111414;
+    --bg-accent: rgba(255, 255, 255, 0.05);
+    --bg-error: #FEE7EA;
+
+    --size-0: 0px;
+    --size-1: 1px;
+    --size-2: 2px;
+    --size-3: 4px;
+    --size-4: 8px;
+    --size-5: 10px;
+    --size-6: 16px;
+    --size-7: 20px;
+    --size-8: 24px;
+    --size-9: 32px;
+    --size-10: 46px;
+    --size-11: 64px;
+
+    --layer-1: 1;
+    --layer-2: 2;
+    --layer-3: 3;
+    /* NAVBAR*/
+    --layer-4: 4;
+    /* PORTAL*/
+    --layer-5: 5;
+    --layer-n: -1;
+
+    color-scheme: light dark;
+    color: var(--color-primary);
+    background-color: var(--bg-primary);
+
+    --font: -apple-system, 'Nohemi', sans-serif, system-ui, "Apple Color Emoji",
+        "Segoe UI Emoji";
+}
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font);
+    height: 100%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    font-size: clamp(16px, 2vmin, 64px);
+}
+
+img.rounded {
+    border-radius: var(--size-3);
+}
+
+svg {
+    fill: currentColor;
+    aspect-ratio: 1/1;
+}
+
+hr {
+    border-color: var(--color-border);
+}
+
+.main-text {
+    font-weight: 600;
+    color: var(--color-secondary);
+}
+
+/* LINKS & BUTTONS */
+a {
+    text-decoration: none;
+}
+
+a:not(.button) {
+    color: var(--color-accent);
+}
+
+a.plain {
+    color: inherit;
+}
+
+a:not(.button, .course-theme):hover {
+    color: var(--color-accent-hover);
+}
+
+a.active {
+    color: var(--color-secondary);
+}
+
+button,
+.button {
+    color: var(--color-white);
+    background-color: var(--color-accent);
+    padding: .5em .8em;
+    min-width: 135px;
+    font-size: 1rem;
+    border: none;
+    border-radius: var(--size-3);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+button:where(.small),
+.button:where(.small) {
+    padding: .25em .5em;
+    min-width: 30px;
+    font-size: .75rem;
+}
+
+button:where(.big),
+.button:where(.big) {
+    padding: .8rem 3em;
+    min-width: 300px;
+}
+
+button:not(.outline):hover,
+.button:not(.outline):hover {
+    opacity: .7;
+}
+
+.outline {
+    outline: 1px solid var(--color-accent);
+    color: var(--color-accent);
+    background-color: transparent;
+}
+
+.ghost {
+    background-color: transparent;
+}
+
+
+/* LISTS */
+.no-list-style {
+    list-style: none;
+}
+
+.no-list-pad {
+    padding-inline-start: 0;
+}
+
+
+/* UTILITY CONTAINERS */
+.error-page {
+    color: var(--color-error);
+    background-color: var(--bg-error);
+    height: 100%;
+
+    text-align: center;
+    padding: 1rem;
+}
+
+.container {
+    --container-gutter: 5%;
+    width: min(calc(100% - 2*var(--container-gutter)), 1200px);
+    margin-inline: auto;
+}
+
+.content {
+    width: min(100%, 900px);
+    border-radius: var(--size-3);
+    padding: 1rem;
+}
+
+.content.medium {
+    max-width: 600px;
+}
+
+.content.small {
+    max-width: 350px;
+}
+
+
+/* UTILITY BORDERS/RADIUS */
+.r-0 {
+    border-radius: 0;
+}
+
+.r-1 {
+    border-radius: var(--size-2);
+}
+
+.r-2 {
+    border-radius: var(--size-3);
+}
+
+.r-3 {
+    border-radius: var(--size-4);
+}
+
+.r-4 {
+    border-radius: var(--size-5);
+}
+
+.r-5 {
+    border-radius: var(--size-7);
+}
+
+.r-6 {
+    border-radius: var(--size-9);
+}
+
+.r-7 {
+    border-radius: var(--size-10);
+}
+
+.rounded {
+    border-radius: 50%;
+}
+
+.navbar {
+    position: fixed;
+    width: 100%;
+}
+
+.navbar-blur {
+    background-color: var(--navbar-blur);
+    -webkit-backdrop-filter: blur(30px);
+    backdrop-filter: blur(30px);
+    z-index: var(--layer-4);
+}
+
+.navbar-margin {
+    margin-top: 7.5rem;
+}
+
+.desktopNav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100dvh;
+}
+
+.min-w {
+    width: -moz-fit-content;
+    width: fit-content;
+}
+
+.theme-picker {
+    color: inherit;
+    background-color: transparent;
+    width: 40px;
+    height: 40px;
+}
+
+.divider {
+    height: 2rem;
+    border-left: 2px solid #737575;
+}
+
+/* END OF UTILITIES */
+
+
+body[data-theme='dark'] {
+    --color-primary: #BABABA;
+    --color-secondary: #EFEFEF;
+    --color-tertiary: #111414;
+    --color-border: #737575;
+    --color-accent: #EFEFEF80;
+    --navbar-blur: #1114143F;
+
+    --bg-primary: #111414;
+    --bg-secondary: #00000077;
+    --bg-tertiary: #FFFFFF;
+    --bg-accent: #EFEFEF0F;
+    --bg-table-row: #dedede11;
+
+    color: var(--color-primary);
+    background-color: var(--bg-primary);
+}

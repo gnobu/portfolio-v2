@@ -1,0 +1,48 @@
+:root {
+    --bg-card: #F2F2F2;
+    --font: -apple-system, 'Satoshi-Regular', sans-serif;
+}
+
+body[data-theme='dark'] {
+    --bg-card: #292C2C;
+}
+
+.tag {
+    padding: .5rem 1rem;
+    min-width: 50px;
+    text-align: center;
+    border: 1px solid var(--color-border);
+    border-radius: var(--size-7);
+    background-color: var(--bg-accent);
+}
+
+.intro_post {
+    display: grid;
+    gap: 1rem;
+    column-gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
+}
+
+.other_posts {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 31%));
+}
+
+.post {
+    border-radius: var(--size-4);
+    border: 1px solid rgba(67, 67, 67, 0.20);
+    box-shadow: 0px 0px 15px 0px rgba(17, 20, 20, 0.10);
+}
+
+.post-image {
+    width: 100%;
+    max-height: 230px;
+    aspect-ratio: 5/3;
+    object-fit: cover;
+    border-radius: var(--size-4);
+}
+
+.bg-card {
+    background-color: var(--bg-card);
+}

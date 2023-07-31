@@ -1,0 +1,98 @@
+/* UTILITY TYPOGRAPHY */
+.no-wrap {
+    white-space: nowrap;
+}
+
+.word-wrap {
+    white-space: normal;
+}
+
+.centered-text {
+    text-align: center;
+}
+
+.start-text {
+    text-align: start;
+}
+
+.end-text {
+    text-align: end;
+}
+
+.f-s-2 {
+    font-size: .5rem;
+}
+
+.f-s-3 {
+    font-size: .75rem;
+}
+
+.f-s-4,
+.f-s-reg {
+    font-size: 1rem;
+}
+
+.f-s-5 {
+    font-size: 1.125rem;
+}
+
+.f-s-6 {
+    font-size: 1.5rem;
+}
+
+.f-s-7 {
+    font-size: 2rem;
+}
+
+.f-s-8 {
+    font-size: 2.5rem;
+}
+
+.f-s-9 {
+    font-size: 3rem;
+}
+
+.f-s-10 {
+    font-size: 4rem;
+}
+
+.f-w-1 {
+    font-weight: 100;
+}
+
+.f-w-2 {
+    font-weight: 200;
+}
+
+.f-w-3 {
+    font-weight: 300;
+}
+
+.f-w-4 {
+    font-weight: 400;
+}
+
+.f-w-5 {
+    font-weight: 500;
+}
+
+.f-w-6 {
+    font-weight: 600;
+}
+
+.f-w-7 {
+    font-weight: 700;
+}
+
+.f-w-8 {
+    font-weight: 800;
+}
+
+.f-w-9 {
+    font-weight: 900;
+}
+
+.stroke-text {
+    -webkit-text-stroke: 1px;
+    -webkit-text-fill-color: transparent;
+}

@@ -1,0 +1,61 @@
+/* UTILITY COLOURS */
+.col-white {
+    color: var(--color-white);
+}
+
+.col-black {
+    color: var(--color-black);
+}
+
+.col-pry {
+    color: var(--color-primary);
+}
+
+.col-sec {
+    color: var(--color-secondary);
+}
+
+.col-tert {
+    color: var(--color-tertiary);
+}
+
+.col-accent {
+    color: var(--color-accent);
+}
+
+.col-border {
+    color: var(--color-border);
+}
+
+.col-warn {
+    color: var(--color-warn);
+}
+
+.bg-sec {
+    background-color: var(--bg-secondary);
+}
+
+.bg-tert {
+    background-color: var(--bg-tertiary);
+}
+
+.bg-accent {
+    background-color: var(--bg-accent);
+}
+
+.bg-warn {
+    background-color: var(--color-warn);
+}
+
+.bg-blue {
+    background-color: var(--bg-blue);
+}
+
+.bg-cream {
+    background-color: var(--bg-cream);
+}
+
+.bg-safe {
+    background-color: var(--bg-safe);
+}
+
