@@ -30,27 +30,23 @@ export default function Project() {
         <section className='container m-blk-4'>
             <div className="content m-ln-auto flex-col gap-2">
                 <h1 className='f-s-8 m-blk-0'>{project.title}</h1>
-                <p className='project_desc m-blk-0'>
-                    Lorem ipsum dolor sit amet consectetur. Commodo ac non integer
-                    dolor venenatis sem lorem. Pretium sollicitudin nec sodales in
-                    augue sed lectus. Volutpat arcu hendrerit
-                </p>
+                <p className='project_desc m-blk-0'>{project.description}</p>
                 <div className="flex-col gap-p5">
-                    <Row title='Type' value='Personal Project' />
-                    <Row title='Role' value='Front-end developer' />
-                    <Row title='Year' value='2023' />
-                    <Row title='Stack' value='Remix, TypeScript, Node.js' />
+                    {Object.entries(project.details).map(([key, val]) => (
+                        <Row key={key} value={val instanceof Object ? val.join(', ') : `${val}`}
+                            title={key.replace(key.charAt(0), key.charAt(0).toLocaleUpperCase())} />
+                    ))}
                 </div>
 
-                <Link className='button outline flex gap-1 min-w r-4' to={'.'}>
-                    <span>view website</span>
+                <Link className='button outline flex gap-1 min-w r-4' to={project.link.url}>
+                    <span>view {project.link.type}</span>
                     <SvgText src={arrowTopRightIcon} srcCls='f-s-7' />
                 </Link>
             </div>
         </section>
-        <footer className='p-blk-4 border-top flex centered-flex gap-p5 f-s-6'>
+        <Link to={`/projects/${project.next ?? '.'}`} className='p-blk-4 border-top flex centered-flex gap-p5 f-s-6'>
             <span>Next Project</span>
             <SvgText src={arrowLeftIcon} srcCls='f-s-7 rotate-180' />
-        </footer>
+        </Link>
     </>)
 }
