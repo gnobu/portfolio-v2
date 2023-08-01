@@ -1,8 +1,6 @@
 .projects {
     display: grid;
-    gap: 3rem;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 47%));
-    justify-content: space-between;
+    gap: 2rem;
 }
 
 .project {
@@ -90,4 +88,16 @@
 
 .rotate-180 {
     transform: rotate(180deg);
+}
+
+@media screen and (orientation=landscape) {
+    .projects {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (min-width:900px) {
+    .projects {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
