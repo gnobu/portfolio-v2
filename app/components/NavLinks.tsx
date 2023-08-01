@@ -5,7 +5,7 @@ export default function NavLinks() {
     return (
         <nav>
             <ul className={`min-w no-list-pad no-list-style m-blk-0 al-end flex-col gap-p5`}>
-                <li><NavLink to="/resume"
+                <li><NavLink target='_blank' to="https://drive.google.com/file/d/11KOd5L9ignURi7Y80-JZKXvCGhHJSuOW/view?usp=sharing"
                     className={({ isActive }) =>
                         isActive ? `active ${navLinkClass}`: navLinkClass}>
                     RESUME
