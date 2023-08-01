@@ -1,4 +1,4 @@
-import { LinksFunction, V2_MetaFunction } from "@remix-run/node"
+import { LinksFunction, V2_MetaFunction, json } from "@remix-run/node"
 
 import ArticleCard from "~/components/ArticleCard"
 import IntoArticle from "~/components/IntoArticle"
@@ -8,6 +8,8 @@ import Tag from "~/components/Tag"
 import { arrowLeftIcon, searchIcon } from "~/assets/icons"
 import { postImage } from "~/assets/images"
 import blogStylesUrl from "~/styles/blog.css"
+import { getArticles, getIntroArticle } from "~/utils/blog-data"
+import { useLoaderData } from "@remix-run/react"
 
 export const meta: V2_MetaFunction = () => {
     return [{ title: "BLOG | UBONG" }]
@@ -17,34 +19,15 @@ export const links: LinksFunction = () => [
     { rel: "stylesheet", href: blogStylesUrl },
 ]
 
-const articles = [
-    {
-        image: postImage,
-        title: '3 Essential React Testing Library Tips for Flawless Tests',
-        tag: 'JavaScript',
-        length: '4 minutes',
-        intro: "Writing tests is an important part of any software development project. React Testing Library is a popular testing tool for React applications. However, even with its automatic logging, it can be difficult to identify why a test has failed. In this post, we'll explore three tips for writing better tests from the start.",
-        date: '10 March 2023',
-    },
-    {
-        image: postImage,
-        title: ' Essential React Testing Library Tips for Flawless Tests',
-        tag: 'JavaScript',
-        length: '4 minutes',
-        intro: "Writing tests is an important part of any software development project. React Testing Library is a popular testing tool for React applications. However, even with its automatic logging, it can be difficult to identify why a test has failed. In this post, we'll explore three tips for writing better tests from the start.",
-        date: '10 March 2023',
-    },
-    {
-        image: postImage,
-        title: ' Essential React Testing Library Tips for Flawless Tests',
-        tag: 'JavaScript',
-        length: '4 minutes',
-        intro: "Writing tests is an important part of any software development project. React Testing Library is a popular testing tool for React applications. However, even with its automatic logging, it can be difficult to identify why a test has failed. In this post, we'll explore three tips for writing better tests from the start.",
-        date: '10 March 2023',
-    },
-]
+export function loader() {
+    const articles = getArticles()
+    const introArticle = getIntroArticle()
+
+    return json({ introArticle, articles })
+}
 
 export default function Blog() {
+    const { articles, introArticle } = useLoaderData<typeof loader>()
     const { goBack } = useGoBack()
 
     return (
@@ -68,12 +51,12 @@ export default function Blog() {
             </section>
 
             <section className="container m-blk-5">
-                <IntoArticle article={articles[0]} />
+                <IntoArticle article={introArticle} />
             </section>
 
             <section className="container other_posts m-blk-5">
-                {articles.map((article, idx) => {
-                    return <ArticleCard key={idx} article={article} />
+                {articles.map(article => {
+                    return <ArticleCard key={article.id} article={article} />
                 })}
             </section>
         </main>
