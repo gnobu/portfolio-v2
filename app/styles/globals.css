@@ -67,7 +67,7 @@ body {
     min-height: 100dvh;
     overflow-x: hidden;
     scroll-behavior: smooth;
-    font-size: clamp(16px, 2vmin, 64px);
+    font-size: clamp(16px, 3vmin, 64px);
 }
 
 img.rounded {
