@@ -64,7 +64,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: var(--font);
-    height: 100%;
+    min-height: 100dvh;
     overflow-x: hidden;
     scroll-behavior: smooth;
     font-size: clamp(16px, 2vmin, 64px);
