@@ -2,13 +2,8 @@ import { Link } from "@remix-run/react"
 
 import SvgText from "./SvgText"
 import { arrowTopRightIcon } from "~/assets/icons"
+import { Project } from "~/interfaces/project.interface"
 
-export interface Project {
-    id: string,
-    image: string,
-    title: string,
-    year: number,
-}
 export default function ProjectCard({ project }: { project: Project }) {
     return (
         <article tabIndex={0} className="project">
@@ -16,7 +11,7 @@ export default function ProjectCard({ project }: { project: Project }) {
             <span className="project_year">'{project.year}</span>
             <div className="project_overlay">
                 <h2 className="m-blk-0">{project.title}</h2>
-                <Link to={project.id ?? '.'} className="plain project_arrow rounded p-ln-2 p-blk-2">
+                <Link to={`${project.id}` ?? '.'} className="plain project_arrow rounded p-ln-2 p-blk-2">
                     <SvgText src={arrowTopRightIcon} srcCls="f-s-7" />
                 </Link>
             </div>
