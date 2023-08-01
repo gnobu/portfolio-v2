@@ -30,7 +30,7 @@ const projects = [
 export default function Projects() {
   return (
     <main className="navbar-margin">
-      <header className="container m-blk-5">
+      <header className="container m-blk-6">
         <h1 className="f-s-9 f-w-3 col-sec">A showcase of my personal projects</h1>
       </header>
       <section className="container projects m-blk-5">
