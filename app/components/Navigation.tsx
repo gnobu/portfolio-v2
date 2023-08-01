@@ -20,21 +20,19 @@ export default function Navigation() {
                 <SvgText src={logo} srcCls="f-s-8 col-sec" />
             </Link>
             <div className="flex gap-1 al-start">
-                <div className="col-pry bg-sec p-blk-p5 p-ln-p5 rounded">
-                    {isDarkTheme
-                        ? <button title={`switch to light theme`}
-                            onClick={() => setTheme('light')}
-                            className={`small theme-picker`}
-                        >
-                            <SvgText src={sunIcon} srcCls="f-s-7" />
-                        </button>
-                        : <button title={`switch to dark theme`}
-                            onClick={() => setTheme('dark')}
-                            className={`small theme-picker`}
-                        >
-                            <SvgText src={moonIcon} srcCls="f-s-7" />
-                        </button>}
-                </div>
+                {isDarkTheme
+                    ? <button title={`switch to light theme`}
+                        onClick={() => setTheme('light')}
+                        className={`bg-sec small theme-picker rounded`}
+                    >
+                        <SvgText src={sunIcon} srcCls="f-s-7" />
+                    </button>
+                    : <button title={`switch to dark theme`}
+                        onClick={() => setTheme('dark')}
+                        className={`bg-sec small theme-picker rounded`}
+                    >
+                        <SvgText src={moonIcon} srcCls="f-s-7" />
+                    </button>}
                 {isBlogPage ? null : <NavLinks />}
             </div>
         </div>

@@ -262,9 +262,7 @@ button:not(.outline):hover,
 
 .theme-picker {
     color: inherit;
-    background-color: transparent;
-    width: 40px;
-    height: 40px;
+    padding: 8px;
 }
 
 .divider {
