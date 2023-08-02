@@ -37,6 +37,11 @@ body[data-theme='dark'] {
     line-height: 120%;
 }
 
+.title {
+    margin-bottom: 0;
+    font-size: clamp(1.5rem, 7vmin, 2.5rem);
+}
+
 a.post_title {
     color: var(--color-secondary);
 }
