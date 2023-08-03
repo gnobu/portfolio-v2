@@ -27,8 +27,8 @@
     color: var(--color-border);
 }
 
-.col-warn {
-    color: var(--color-warn);
+.col-error {
+    color: var(--color-error);
 }
 
 .bg-sec {
@@ -43,8 +43,8 @@
     background-color: var(--bg-accent);
 }
 
-.bg-warn {
-    background-color: var(--color-warn);
+.bg-error {
+    background-color: var(--bg-error);
 }
 
 .bg-blue {

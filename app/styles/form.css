@@ -21,10 +21,9 @@ form:not(.plain) {
 [type="time"],
 [type="url"],
 [type="color"],
+[type="file"],
 select,
 textarea {
-    /* display: flex;
-    align-items: center; */
     width: 100%;
     padding: .7rem;
     border: none;
@@ -115,7 +114,7 @@ textarea[readonly] {
 }
 
 [type="file"] {
-    width: 100%;
+    padding: .6rem;
 }
 
 label {
@@ -134,13 +133,11 @@ label {
 .form-group-inline {
     display: flex;
     gap: .5rem;
-    max-width: 400px;
 }
 
 .form-group,
 .form-divisor {
     width: 100%;
-    max-width: 400px;
 }
 
 .code_input {
