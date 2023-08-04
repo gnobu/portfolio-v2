@@ -28,12 +28,12 @@ export default function Blog() {
             </section>
 
             <section className="container m-blk-5">
-                {introArticle ? <IntoArticle article={introArticle} /> : null}
+                {introArticle ? <IntoArticle article={{ ...introArticle, createdAt: new Date(introArticle.createdAt) }} /> : null}
             </section>
 
             <section className="container other_posts m-blk-5">
                 {articles.map(article => {
-                    return <ArticleCard key={article.slug} article={article} />
+                    return <ArticleCard key={article.slug} article={{ ...article, createdAt: new Date(article.createdAt) }} />
                 })}
             </section>
         </main>

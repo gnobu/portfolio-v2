@@ -6,8 +6,8 @@ export default function ArticleCard({ article }: { article: Omit<Article, 'intro
         <img className="post_image" src={article.image} alt="computer screen with code"
             width={350} />
         <span className="flex jst-btwn al-end f-s-3">
-            <span><span className="f-s- f-w-6">{article.tag}</span> | {article.length} read</span>
-            <span className="col-border">{new Date(article.createdAt).toLocaleDateString()}</span>
+            <span><span className="f-s- f-w-6">{article.tag}</span> | {article.length} mins read</span>
+            <span className="col-border">{article.createdAt.toLocaleDateString()}</span>
         </span>
         <h2 className="post_title f-s-5 f-w-6 col-sec m-blk-1">{article.title}</h2>
     </Link>
