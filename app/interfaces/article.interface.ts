@@ -1,9 +1,10 @@
 export interface Article {
-    id: number;
-    image: string,
+    slug: string,
     title: string,
     tag: string,
-    length: string,
     intro: string,
-    date: string,
+    image: string,
+    markdown: string,
+    length: number,
+    createdAt: string
 }
