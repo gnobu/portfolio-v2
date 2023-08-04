@@ -1,21 +1,38 @@
 import { useState } from 'react'
-import { ActionArgs, json, redirect } from '@remix-run/node'
+import {
+    ActionArgs, NodeOnDiskFile, json, redirect,
+    unstable_composeUploadHandlers, unstable_createFileUploadHandler,
+    unstable_createMemoryUploadHandler, unstable_parseMultipartFormData
+} from '@remix-run/node'
 import { Form, Link, useActionData, useNavigation } from '@remix-run/react'
 import invariant from 'tiny-invariant'
-import { marked } from "marked"
+import slugify from 'slugify'
+
+import { Cloudinary } from '~/utils/cloudinary.server'
+import markedWrapper from '~/utils/marked'
+import { createArticle } from '~/models/blog.server'
 
 export const action = async ({ request }: ActionArgs) => {
-    const formData = await request.formData()
+    const uploadHandler = unstable_composeUploadHandlers(
+        unstable_createFileUploadHandler({
+            maxPartSize: 5_000_000,
+            file: ({ filename }) => filename,
+        }),
+        unstable_createMemoryUploadHandler()// parse everything else into memory
+    )
+    const formData = await unstable_parseMultipartFormData(request, uploadHandler)
+
     const title = formData.get("title")
     const tag = formData.get("tag")
     const image = formData.get("image")
-    console.log(typeof image)
+    const intro = formData.get("intro")
     const markdown = formData.get("markdown")
 
     const errors = {
         title: title ? null : "Title is required",
         tag: tag ? null : "Tag is required",
         image: image ? null : "Image is required",
+        intro: intro ? null : "Intro is required",
         markdown: markdown ? null : "Markdown is required",
     }
     const hasErrors = Object.values(errors).some(
@@ -33,17 +50,24 @@ export const action = async ({ request }: ActionArgs) => {
         typeof tag === "string",
         "Tag must be a string"
     )
-    // invariant(
-    //     typeof image === "string",
-    //     "Image must be a string"
-    // )
+    invariant(
+        image instanceof NodeOnDiskFile,
+        "Image must be an object"
+    )
+    invariant(
+        typeof intro === "string",
+        "Intro must be an object"
+    )
     invariant(
         typeof markdown === "string",
         "Markdown must be a string"
     )
+    const slug = slugify(title, { strict: true })
+    const length = Math.min(1, Math.round((intro + markdown).split(' ').length / 200))
+    const { imageURL } = await Cloudinary.uploadImage(image.getFilePath(), slug, 'blog')
+    if (!imageURL) throw new Error('An error occured while uploading the picture')
 
-    // await createPost({ title, tag, markdown })
-
+    await createArticle({ title, tag, markdown, length, slug, image: imageURL, intro })
     return redirect("/blog")
 }
 
@@ -53,7 +77,8 @@ export default function NewBlog() {
     const { state } = useNavigation()
     const isCreating = state === 'submitting'
 
-    const [value, setValue] = useState('')
+    const [intro, setIntro] = useState('')
+    const [markdown, setMarkdown] = useState('')
     const inputClassName = `form-element`
 
     return (
@@ -72,18 +97,35 @@ export default function NewBlog() {
                     <div className='form-group-inline'>
                         <label htmlFor='tag'>
                             Add tag:{" "}
+                            <input type="text" name="tag" id='tag' className={inputClassName} />
                             {errors?.tag ? (
                                 <em className="col-error f-s-3">{errors.tag}</em>
                             ) : null}
-                            <input type="text" name="tag" id='tag' className={inputClassName} />
                         </label>
                         <label htmlFor='image'>
                             Intro image:{" "}
+                            <input type="file" accept='image/*' name="image" id='image' className={inputClassName} />
                             {errors?.image ? (
                                 <em className="col-error f-s-3">{errors.image}</em>
                             ) : null}
-                            <input type="file" accept='image/*' name="image" id='image' className={inputClassName} />
                         </label>
+                    </div>
+                    <div className='form-group'>
+                        <label htmlFor="intro">
+                            Intro:{" "}
+                            {errors?.intro ? (
+                                <em className="col-error f-s-3">
+                                    {errors.intro}
+                                </em>
+                            ) : null}
+                        </label>
+                        <br />
+                        <textarea
+                            id="intro"
+                            name="intro"
+                            className={inputClassName}
+                            onChange={(e) => setIntro(e.target.value)}
+                        />
                     </div>
                     <div className='form-group'>
                         <label htmlFor="markdown">
@@ -100,7 +142,7 @@ export default function NewBlog() {
                             name="markdown"
                             rows={10}
                             className={inputClassName}
-                            onChange={(e) => setValue(e.target.value)}
+                            onChange={(e) => setMarkdown(e.target.value)}
                         />
                     </div>
                     <div className="flex gap-1">
@@ -112,8 +154,9 @@ export default function NewBlog() {
                 </Form>
             </main>
             <aside className='preview'>
-                <h2 className='preview_title f-s-4'>Preview</h2>
-                <div dangerouslySetInnerHTML={{ __html: marked(value, { mangle: false, headerIds: false }) }}></div>
+                <span className='preview_title f-s-4 f-w-5'>Preview</span>
+                <p>{intro}</p>
+                <div dangerouslySetInnerHTML={{ __html: markedWrapper(markdown) }}></div>
             </aside>
         </div>
     )
