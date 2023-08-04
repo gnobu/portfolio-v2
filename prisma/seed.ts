@@ -14,15 +14,12 @@ async function seed() {
       length: 1,
       markdown: `
       ## First Section
-      
       This is some explanation. See the code below.
-      
       \`\`\`js
       export function getArticle(id: number) {
         return articles.find(article => article.id === id) ?? null
       }
       \`\`\`
-      
       ## Conclusion
       In conclusion, in the immortal words of the great Anon:
       >**E be things**!
@@ -37,7 +34,6 @@ async function seed() {
       length: 2,
       markdown: `
       ## 90s Mixtape
-      
       - I wish (Skee-Lo)
       - This Is How We Do It (Montell Jordan)
       - Everlong (Foo Fighters)
@@ -47,14 +43,14 @@ async function seed() {
       - Just a Friend (Biz Markie)
       - The Man Who Sold The World (Nirvana)
       - Semi-Charmed Life (Third Eye Blind)
-  - ...Baby One More Time (Britney Spears)
-  - Better Man (Pearl Jam)
-  - It's All Coming Back to Me Now (Céline Dion)
-  - This Kiss (Faith Hill)
-  - Fly Away (Lenny Kravits)
-  - Scar Tissue (Red Hot Chili Peppers)
-  - Santa Monica (Everclear)
-  - C'mon N' Ride it (Quad City DJ's)
+      - Baby One More Time (Britney Spears)
+      - Better Man (Pearl Jam)
+      - It's All Coming Back to Me Now (Céline Dion)
+      - This Kiss (Faith Hill)
+      - Fly Away (Lenny Kravits)
+      - Scar Tissue (Red Hot Chili Peppers)
+      - Santa Monica (Everclear)
+      - C'mon N' Ride it (Quad City DJ's)
       `.trim(),
     },
   ]
