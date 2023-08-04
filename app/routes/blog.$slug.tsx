@@ -1,18 +1,20 @@
 import { LoaderArgs, V2_MetaFunction, json, redirect } from '@remix-run/node'
 import { useLoaderData } from '@remix-run/react'
 
+import { getArticle } from '~/models/blog.server'
+import useGoBack from '~/hooks/useGoBack'
+import markedWrapper from '~/utils/marked'
 import { arrowLeftIcon } from '~/assets/icons'
 import SvgText from '~/components/SvgText'
-import useGoBack from '~/hooks/useGoBack'
 
-import { getArticle } from '~/utils/blog-data'
 
-export function loader({ params }: LoaderArgs) {
-    const { id } = params
-    if (!id) throw new Error("Could not find the movie")
+export async function loader({ params }: LoaderArgs) {
+    const { slug } = params
+    if (!slug) return redirect('/blog')
+    // if (!slug) throw new Error("Could not find the article")
 
-    const article = getArticle(+id)
-    if (!article) return redirect('/articles') // TODO: 404
+    const article = await getArticle(slug)
+    if (!article) return redirect('/blog') // TODO: 404
 
     return json({ article })
 }
@@ -38,20 +40,17 @@ export default function Article() {
                     <div className="">
                         <span className="flex jst-btwn al-end f-s-3">
                             <span><span className="f-s-4 f-w-6">{article.tag}</span> | {article.length} read</span>
-                            <span className="col-border">{article.date}</span>
+                            <span className="col-border">{new Date(article.createdAt).toLocaleDateString()}</span>
                         </span>
                         <h1 className="title f-s-6 f-w-6">{article.title}</h1>
                     </div>
                 </header>
             </section>
-            <div className='content m-ln-auto'>
-                <section className=''>
-                    <h2>Introduction</h2>
-                </section>
-                <section className=''>
-                    <h2>Conclusion</h2>
-                </section>
-            </div>
+            <article className='content m-ln-auto'>
+                <p>{article.intro}</p>
+                <div dangerouslySetInnerHTML={{ __html: markedWrapper(article.markdown) }}>
+                </div>
+            </article>
             <section className=''>
                 <h2>Related Articles</h2>
             </section>

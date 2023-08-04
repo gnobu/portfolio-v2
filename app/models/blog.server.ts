@@ -1,7 +1,7 @@
 import { prisma } from "~/db.server"
 
 export async function getArticles() {
-    return prisma.article.findMany({
+    return await prisma.article.findMany({
         select: {
             title: true,
             image: true,
@@ -14,5 +14,11 @@ export async function getArticles() {
         orderBy: {
             createdAt: 'desc'
         }
+    })
+}
+
+export async function getArticle(slug: string) {
+    return await prisma.article.findUnique({
+        where: { slug }
     })
 }
