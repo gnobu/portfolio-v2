@@ -1,5 +1,5 @@
+import { Article } from '@prisma/client'
 import { Link } from '@remix-run/react'
-import { Article } from '~/interfaces/article.interface'
 
 export default function ArticleCard({ article }: { article: Omit<Article, 'intro' | 'markdown'> }) {
     return <Link to={`${article.slug}`} className="post p-blk-2 p-ln-2">
