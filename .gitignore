@@ -4,3 +4,7 @@ node_modules
 /public/build
 /.netlify
 .env
+
+/prisma/data.db
+/prisma/data.db-journal
+test.md
