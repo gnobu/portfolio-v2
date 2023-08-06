@@ -29,3 +29,10 @@ export async function createArticle(data: Omit<Article, 'createdAt'>) {
         data
     })
 }
+
+export async function updateArticle(slug: string, data: Partial<Article>) {
+    return await prisma.article.update({
+        where: { slug },
+        data
+    })
+}
