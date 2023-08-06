@@ -1,10 +1,10 @@
 import { LoaderArgs, V2_MetaFunction, json, redirect } from '@remix-run/node'
-import { useLoaderData } from '@remix-run/react'
+import { Link, useLoaderData } from '@remix-run/react'
 
 import { getArticle } from '~/models/blog.server'
 import useGoBack from '~/hooks/useGoBack'
 import markedWrapper from '~/utils/marked'
-import { arrowLeftIcon } from '~/assets/icons'
+import { arrowLeftIcon, editIcon } from '~/assets/icons'
 import SvgText from '~/components/SvgText'
 
 
@@ -27,14 +27,15 @@ export default function Article() {
     const { article } = useLoaderData<typeof loader>()
     const { goBack } = useGoBack()
 
-    return (<main className="m-blk-7">
-        <div className="container">
-            <section className="">
-                <aside className="flex jst-btwn m-blk-4">
-                    <button title="Previous page" onClick={goBack} className="rounded small bg-sec p-blk-2 p-ln-2">
-                        <SvgText src={arrowLeftIcon} srcCls="f-s-6" />
-                    </button>
-                </aside>
+    return (
+        <div className="container m-blk-7">
+            <aside className="flex jst-btwn m-blk-4">
+                <button title="Previous page" onClick={goBack} className="rounded small bg-sec p-blk-2 p-ln-2">
+                    <SvgText src={arrowLeftIcon} srcCls="f-s-6" />
+                </button>
+                <Link to='edit' className='button small ghost'><SvgText src={editIcon} srcCls='f-s-6' /></Link>
+            </aside>
+            <main className="">
                 <header className="intro_post p-blk-2 p-ln-2">
                     <img className="post_image" src={article.image} alt="computer screen with code" width={350} />
                     <div className="">
@@ -45,15 +46,15 @@ export default function Article() {
                         <h1 className="title f-s-6 f-w-6">{article.title}</h1>
                     </div>
                 </header>
-            </section>
-            <article className='content m-ln-auto'>
-                <p>{article.intro}</p>
-                <div dangerouslySetInnerHTML={{ __html: markedWrapper(article.markdown) }}>
-                </div>
-            </article>
-            <section className=''>
-                <h2>Related Articles</h2>
-            </section>
+                <article className='content m-ln-auto'>
+                    <p>{article.intro}</p>
+                    <div dangerouslySetInnerHTML={{ __html: markedWrapper(article.markdown) }}>
+                    </div>
+                </article>
+                <aside className=''>
+                    <h2>Related Articles</h2>
+                </aside>
+            </main>
         </div>
-    </main>)
+    )
 }
