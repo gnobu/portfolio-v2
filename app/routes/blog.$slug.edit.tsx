@@ -27,7 +27,7 @@ export const action = async ({ request }: ActionArgs) => {
 
     if (intent === 'delete') {
         const { image } = await deleteArticle(slug as string)
-        const { isSuccess, message } = await Cloudinary.deleteImage(image)
+        const { isSuccess, message } = await Cloudinary.deleteImage(image.match(/(portfolio)\/[\w/-]+/)?.[0] ?? '')
         if (!isSuccess) throw new Error(message)
     }
     return redirect("/blog")
