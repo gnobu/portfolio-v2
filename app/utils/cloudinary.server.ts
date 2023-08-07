@@ -29,7 +29,6 @@ class CloudinaryUtil {
 
             const { secure_url } = uploadResponse
             // unlinkSync(imageToUpload)
-
             if (!secure_url) throw new Error("Could not uplaod image.")
 
             return {
@@ -43,6 +42,24 @@ class CloudinaryUtil {
             return {
                 isSuccess: false,
                 message: "Internal Server Error",
+            }
+        }
+    }
+
+    async deleteImage(publicId: string) {
+        try {
+            const uploadResponse = await cloudinary.uploader.destroy(publicId)
+            if (!uploadResponse.result) throw new Error("Could not uplaod image.")
+
+            return {
+                isSuccess: true,
+                message: "Successfully deleted image",
+            }
+        } catch (error) {
+            console.log(error)
+            return {
+                isSuccess: false,
+                message: "Could not delete image",
             }
         }
     }
