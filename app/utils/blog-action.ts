@@ -49,7 +49,6 @@ export async function processArticleData(request: Request) {
     const length = Math.ceil((intro + markdown).split(' ').length / 200)
     let res
     if ((image as Blob).size) {
-        console.log(image)
         invariant(image instanceof NodeOnDiskFile, "Incorrect image format")
         res = await Cloudinary.uploadImage(image.getFilePath(), slug, 'blog')
         if (!res.imageURL) throw new Error('An error occured while uploading the picture')
