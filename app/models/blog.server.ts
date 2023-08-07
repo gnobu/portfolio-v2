@@ -36,3 +36,7 @@ export async function updateArticle(slug: string, data: Partial<Article>) {
         data
     })
 }
+
+export async function deleteArticle(slug: string) {
+    return await prisma.article.delete({ where: { slug } })
+}
