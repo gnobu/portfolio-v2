@@ -5,7 +5,8 @@ import { Form, Link, useActionData, useLoaderData, useNavigation } from '@remix-
 import ArticleFormInputs from '~/components/ArticleFormInputs'
 import MarkdownPreview from '~/components/MarkdownPreview'
 import { processArticleData } from '~/utils/blog-action'
-import { getArticle, updateArticle } from '~/models/blog.server'
+import { deleteArticle, getArticle, updateArticle } from '~/models/blog.server'
+import { Cloudinary } from '~/utils/cloudinary.server'
 
 export async function loader({ params }: LoaderArgs) {
     const { slug } = params
@@ -22,8 +23,13 @@ export const action = async ({ request }: ActionArgs) => {
     if (errors) return json(errors)
     if (!slug) throw new Error("No slug provided")
 
-
     if (intent === 'update') await updateArticle(slug as string, { ...data, image: data.image || undefined })
+
+    if (intent === 'delete') {
+        const { image } = await deleteArticle(slug as string)
+        const { isSuccess, message } = await Cloudinary.deleteImage(image)
+        if (!isSuccess) throw new Error(message)
+    }
     return redirect("/blog")
 }
 
