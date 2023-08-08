@@ -1,20 +1,36 @@
 datasource db {
     provider = "sqlite"
-    url = env("DATABASE_URL")
+    url      = env("DATABASE_URL")
 }
-  
-  generator client {
+
+generator client {
     provider = "prisma-client-js"
 }
-  
+
 model Article {
-    slug        String @id
+    slug     String @id
+    title    String
+    tag      String
+    intro    String
+    image    String
+    markdown String
+    length   Int
+
+    createdAt DateTime @default(now())
+}
+
+model Project {
+    id          Int @id @default(autoincrement())
     title       String
-    tag         String
-    intro       String
     image       String
-    markdown    String
-    length      Int
-  
-    createdAt   DateTime @default (now())
+    description String
+    type        String
+    role        String
+    year        String
+    stack       String
+    link_type   String
+    link_url    String
+    next        Int?
+
+    createdAt DateTime @default(now())
 }
