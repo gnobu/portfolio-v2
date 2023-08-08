@@ -30,7 +30,6 @@ model Project {
     stack       String
     link_type   String
     link_url    String
-    next        Int?
 
     createdAt DateTime @default(now())
 }
