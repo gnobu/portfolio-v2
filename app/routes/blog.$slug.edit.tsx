@@ -4,7 +4,7 @@ import { Form, Link, useActionData, useLoaderData, useNavigation } from '@remix-
 
 import ArticleFormInputs from '~/components/ArticleFormInputs'
 import MarkdownPreview from '~/components/MarkdownPreview'
-import { processArticleData } from '~/utils/blog-action'
+import { processArticleData } from '~/utils/blog-action.server'
 import { deleteArticle, getArticle, updateArticle } from '~/models/blog.server'
 import { Cloudinary } from '~/utils/cloudinary.server'
 
