@@ -17,7 +17,7 @@ export async function getProject(id: number) {
     return await prisma.project.findUnique({ where: { id } })
 }
 
-export async function createProject(data: Omit<Project, 'createdAt'>) {
+export async function createProject(data: Omit<Project, 'createdAt' | 'id'>) {
     return await prisma.project.create({
         data
     })
