@@ -153,6 +153,16 @@ button:not(.outline):hover,
     background-color: transparent;
 }
 
+.cancel-btn {
+    background-color: var(--color-error);
+    color: #EFEFEF;
+}
+
+.btn-primary {
+    background-color: #3A51E9;
+    color: #EFEFEF;
+}
+
 
 /* LISTS */
 .no-list-style {

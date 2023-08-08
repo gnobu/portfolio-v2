@@ -83,16 +83,6 @@ blockquote {
     color: #676767;
 }
 
-.cancel-btn {
-    background-color: var(--color-error);
-    color: #EFEFEF;
-}
-
-.btn-primary {
-    background-color: #3A51E9;
-    color: #EFEFEF;
-}
-
 @media screen and (orientation=landscape) {
     .intro_post {
         display: grid;
