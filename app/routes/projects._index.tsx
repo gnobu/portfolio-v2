@@ -2,11 +2,10 @@ import { json } from '@remix-run/node'
 import { useLoaderData } from '@remix-run/react'
 
 import ProjectCard from '~/components/ProjectCard'
-import { getProjects } from '~/utils/project-data'
+import { getProjects } from '~/models/project.server'
 
-export function loader() {
-    const projects = getProjects()
-
+export async function loader() {
+    const projects = await getProjects()
     return json({ projects })
 }
 
