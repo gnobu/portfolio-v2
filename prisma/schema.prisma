@@ -22,7 +22,7 @@ model Article {
 model Project {
     id          Int @id @default(autoincrement())
     title       String
-    image       String
+    image       String?
     description String
     type        String
     role        String
