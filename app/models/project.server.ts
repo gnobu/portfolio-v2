@@ -9,7 +9,7 @@ export async function getProjects() {
             image: true,
             year: true,
         },
-        orderBy: { year: 'desc' }
+        orderBy: [{ year: 'desc' }, { createdAt: "desc" }]
     })
 }
 
