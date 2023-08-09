@@ -1,7 +1,9 @@
 import { json } from '@remix-run/node'
-import { useLoaderData } from '@remix-run/react'
+import { Link, useLoaderData } from '@remix-run/react'
+import { plusIcon } from '~/assets/icons'
 
 import ProjectCard from '~/components/ProjectCard'
+import SvgText from '~/components/SvgText'
 import { getProjects } from '~/models/project.server'
 
 export async function loader() {
@@ -18,5 +20,8 @@ export default function Projects() {
         <section className="container projects m-blk-5">
             {projects.map(project => (<ProjectCard key={project.id} project={project} />))}
         </section>
+        <aside className="container m-blk-6 flex jst-center">
+            <Link to={'new'} title='add project' className='button outline small '><SvgText src={plusIcon} srcCls='f-s-8' /></Link>
+        </aside>
     </>)
 }
