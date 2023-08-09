@@ -18,6 +18,7 @@ export async function processProjectData(request: Request) {
     const link_type = formData.get("link_type")
     const link_url = formData.get("link_url")
     const intent = formData.get("intent")
+    const id = formData.get("id")
 
     const errors = {
         title: title ? null : "Title is required",
@@ -55,7 +56,6 @@ export async function processProjectData(request: Request) {
             title, type, description, role,
             year, stack, image: res?.imageURL ?? null,
             link_type, link_url
-        },
-        intent
+        }, intent, id
     }
 }
