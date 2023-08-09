@@ -6,6 +6,7 @@ import arrowLeft from "./arrow-left.svg"
 import search from "./search-normal.svg"
 import smilie from "./smilie.svg"
 import edit from "./edit.svg"
+import plus from "./plus.svg"
 
 export const logo = `${ub01}#img`
 export const moonIcon = `${moon}#img`
@@ -15,3 +16,4 @@ export const arrowLeftIcon = `${arrowLeft}#img`
 export const searchIcon = `${search}#img`
 export const smilieIcon = `${smilie}#img`
 export const editIcon = `${edit}#img`
+export const plusIcon = `${plus}#img`
