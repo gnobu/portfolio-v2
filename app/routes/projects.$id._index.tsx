@@ -4,7 +4,7 @@ import { Project } from '@prisma/client'
 
 import SvgText from '~/components/SvgText'
 import useGoBack from '~/hooks/useGoBack'
-import { arrowLeftIcon, arrowTopRightIcon } from '~/assets/icons'
+import { arrowLeftIcon, arrowTopRightIcon, editIcon } from '~/assets/icons'
 import Row from '~/components/Row'
 import { getProject } from '~/models/project.server'
 import { projectImage } from '~/assets/images'
@@ -41,13 +41,16 @@ export default function ProjectPage() {
                     ))}
                 </div>
 
-                <Link className='button outline flex gap-1 min-w r-4' to={project.link_url}>
-                    <span>view {project.link_type}</span>
-                    <SvgText src={arrowTopRightIcon} srcCls='f-s-7' />
-                </Link>
+                <div className="flex jst-btwn">
+                    <Link className='button outline flex gap-1 min-w r-4' to={project.link_url}>
+                        <span>view {project.link_type}</span>
+                        <SvgText src={arrowTopRightIcon} srcCls='f-s-7' />
+                    </Link>
+                    <Link to='edit' className='button small ghost'><SvgText src={editIcon} srcCls='f-s-6' /></Link>
+                </div>
             </div>
         </section>
-        <Link to={`/projects/${project.next ?? '.'}`} className='p-blk-4 border-top flex centered-flex gap-p5 f-s-6'>
+        <Link to={`/projects`} className='p-blk-4 border-top flex centered-flex gap-p5 f-s-6'>
             <span>Next Project</span>
             <SvgText src={arrowLeftIcon} srcCls='f-s-7 rotate-180' />
         </Link>
