@@ -5,11 +5,13 @@
 
 .project {
     position: relative;
+    max-height: 300px;
 }
 
 .project_image {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
 }
 
 .project_year {
