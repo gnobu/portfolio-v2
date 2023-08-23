@@ -1,5 +1,5 @@
 import { LoaderArgs, json, redirect } from '@remix-run/node'
-import { Link, useLoaderData } from '@remix-run/react'
+import { Link, useLoaderData, useRouteLoaderData } from '@remix-run/react'
 import { Project } from '@prisma/client'
 
 import SvgText from '~/components/SvgText'
@@ -21,8 +21,13 @@ export async function loader({ params }: LoaderArgs) {
 
 export default function ProjectPage() {
     const { project } = useLoaderData<typeof loader>()
+
+    const { projects } = useRouteLoaderData('routes/projects') as { projects: { id: number, next: number }[] }
+    const currentProject = projects.find(proj => proj.id === project.id)
+
     const { goBack } = useGoBack()
     const rows = ['type', 'role', 'year', 'stack'] as Array<keyof Project>
+    
     return (<>
         <section className="container pos-rel">
             <button title="Previous page" onClick={goBack} className="project_prev rounded small bg-sec p-blk-2 p-ln-2">
@@ -50,7 +55,7 @@ export default function ProjectPage() {
                 </div>
             </div>
         </section>
-        <Link to={`/projects`} className='p-blk-4 border-top flex centered-flex gap-p5 f-s-6'>
+        <Link to={`/projects/${currentProject?.next ?? ''}`} className='p-blk-4 border-top flex centered-flex gap-p5 f-s-6'>
             <span>Next Project</span>
             <SvgText src={arrowLeftIcon} srcCls='f-s-7 rotate-180' />
         </Link>
