@@ -2,7 +2,8 @@
   "private": true,
   "sideEffects": false,
   "scripts": {
-    "build": "remix build",
+    "postinstall": "prisma generate",
+    "build": "npm run postinstall && remix build",
     "dev": "remix dev",
     "start": "cross-env NODE_ENV=production netlify dev",
     "typecheck": "tsc",
