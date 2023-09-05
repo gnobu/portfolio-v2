@@ -1,3 +1,4 @@
+import { Article } from "@prisma/client"
 import { json } from "@remix-run/node"
 import { Link, useLoaderData } from "@remix-run/react"
 import { plusIcon } from "~/assets/icons"
@@ -11,11 +12,16 @@ import { getArticles } from "~/models/blog.server"
 export async function loader() {
     const articles = await getArticles()
 
-    return json({ introArticle: articles[0], articles: articles.slice(1) })
+    if (typeof articles === 'string') {
+        return json({ articles: [], introArticle: null, error: articles })
+    }
+
+    return json({ introArticle: articles[0], articles: articles.slice(1), error: null })
 }
 
 export default function Blog() {
-    const { articles, introArticle } = useLoaderData<typeof loader>()
+    const { articles, introArticle, error } = useLoaderData<typeof loader>()
+    console.log(error)
 
     return (
         <main className="m-blk-7">

@@ -19,7 +19,7 @@ export async function getArticles() {
         })
     } catch (error) {
         console.log(error)
-        return []
+        return (error as Error).message
     }
 }
 
