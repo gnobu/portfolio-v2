@@ -57,7 +57,6 @@ async function seed() {
       stack: 'React, TypeScript, Redux',
       link_type: 'website',
       link_url: '.',
-      next: 1
     },
   ]
 
