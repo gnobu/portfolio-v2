@@ -10,7 +10,7 @@ export async function loader({ params }: LoaderArgs) {
     const { id } = params
     if (!id) return redirect('/projects')
 
-    const project = await getProject(+id)
+    const project = await getProject(id)
     if (!project) return redirect('/projects') // TODO: 404
 
     return json({ project, id })
@@ -21,10 +21,10 @@ export async function action({ request }: ActionArgs) {
     if (errors) return json(errors)
     if (!id) throw new Error("No id provided")
 
-    if (intent === 'update') await updateProject(+id, { ...data, image: data.image || undefined })
+    if (intent === 'update') await updateProject(id as string, { ...data, image: data.image || undefined })
 
     if (intent === 'delete') {
-        await deleteProject(+id)
+        await deleteProject(id as string)
         const { isSuccess, message } = await Cloudinary.deleteImage(`portfolio/projects/${id}`)
         if (!isSuccess) throw new Error(message)
     }

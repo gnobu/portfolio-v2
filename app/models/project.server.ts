@@ -13,7 +13,7 @@ export async function getProjects() {
     })
 }
 
-export async function getProject(id: number) {
+export async function getProject(id: string) {
     return await prisma.project.findUnique({ where: { id } })
 }
 
@@ -23,13 +23,13 @@ export async function createProject(data: Omit<Project, 'createdAt' | 'id'>) {
     })
 }
 
-export async function updateProject(id: number, data: Partial<Project>) {
+export async function updateProject(id: string, data: Partial<Project>) {
     return await prisma.project.update({
         where: { id },
         data
     })
 }
 
-export async function deleteProject(id: number) {
+export async function deleteProject(id: string) {
     return await prisma.project.delete({ where: { id } })
 }

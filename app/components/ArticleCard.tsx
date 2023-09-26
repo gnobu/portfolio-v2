@@ -1,7 +1,7 @@
 import { Article } from '@prisma/client'
 import { Link } from '@remix-run/react'
 
-export default function ArticleCard({ article }: { article: Omit<Article, 'intro' | 'markdown'> }) {
+export default function ArticleCard({ article }: { article: Omit<Article, 'intro' | 'markdown' | 'id'> }) {
     return <Link to={`${article.slug}`} className="post p-blk-2 p-ln-2">
         <img className="post_image" src={article.image} alt="computer screen with code"
             width={350} />

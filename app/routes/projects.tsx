@@ -14,11 +14,11 @@ export const links: LinksFunction = () => [
 
 export async function loader() {
   const projects = await getProjects()
-  const projectsWithNext = projects.map((project, idx, arr) => ({
+  const projectLinkTree = projects.map((project, idx, arr) => ({
     id: project.id,
     next: arr[idx + 1]?.id ?? null
   }))
-  return json({ projects: projectsWithNext })
+  return json({ projectLinkTree })
 }
 
 export default function Projects() {

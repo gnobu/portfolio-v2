@@ -1,15 +1,18 @@
 datasource db {
-    provider = "sqlite"
+    // provider = "sqlite"
+    provider = "mongodb"
     url      = env("DATABASE_URL")
 }
 
 generator client {
-    provider      = "prisma-client-js"
-    binaryTargets = ["native", "rhel-openssl-1.0.x"]
+    provider = "prisma-client-js"
+    // binaryTargets = ["native", "rhel-openssl-1.0.x"]
 }
 
 model Article {
-    slug     String @id
+    id       String @id @default(auto()) @map("_id") @db.ObjectId
+    // slug     String @id
+    slug     String @unique
     title    String
     tag      String
     intro    String
@@ -21,8 +24,9 @@ model Article {
 }
 
 model Project {
-    id          Int     @id @default(autoincrement())
-    title       String
+    // id          Int     @id @default(autoincrement())
+    id          String  @id @default(auto()) @map("_id") @db.ObjectId
+    title       String  @unique
     image       String?
     description String
     type        String

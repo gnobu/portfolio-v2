@@ -13,7 +13,7 @@ export async function loader({ params }: LoaderArgs) {
     const { id } = params
     if (!id) throw new Error("Could not find the movie")
 
-    const project = await getProject(+id)
+    const project = await getProject(id)
     if (!project) return redirect('/projects') // TODO: 404
 
     return json({ project })
@@ -22,8 +22,8 @@ export async function loader({ params }: LoaderArgs) {
 export default function ProjectPage() {
     const { project } = useLoaderData<typeof loader>()
 
-    const { projects } = useRouteLoaderData('routes/projects') as { projects: { id: number, next: number }[] }
-    const currentProject = projects.find(proj => proj.id === project.id)
+    const { projectLinkTree } = useRouteLoaderData('routes/projects') as { projectLinkTree: { id: string, next: string }[] }
+    const currentProject = projectLinkTree.find(proj => proj.id === project.id)
 
     const { goBack } = useGoBack()
     const rows = ['type', 'role', 'year', 'stack'] as Array<keyof Project>

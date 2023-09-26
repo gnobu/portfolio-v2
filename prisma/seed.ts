@@ -35,7 +35,7 @@ async function seed() {
 
   const projects = [
     {
-      id: 1,
+      // id: 1,
       title: 'Project Name',
       image: null,
       description: 'Lorem ipsum dolor sit amet consectetur. Commodo ac non integerdolor venenatis sem lorem.Pretium sollicitudin nec sodales in augue sed lectus.Volutpat arcu hendrerit',
@@ -47,7 +47,7 @@ async function seed() {
       link_url: '.',
     },
     {
-      id: 2,
+      // id: 2,
       title: 'KOTMY',
       image: null,
       description: 'Lorem ipsum dolor sit amet consectetur. Commodo ac non integer dolor venenatis sem lorem.Pretium sollicitudin nec sodales in augue sed lectus.Volutpat arcu hendrerit',
@@ -62,7 +62,7 @@ async function seed() {
 
   for (const project of projects) {
     await prisma.project.upsert({
-      where: { id: project.id },
+      where: { title: project.title },
       update: project,
       create: project,
     })

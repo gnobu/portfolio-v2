@@ -2,7 +2,7 @@ import { Article } from "@prisma/client"
 import { Link } from "@remix-run/react"
 import { StringUtility } from "~/utils/string-utility"
 
-export default function IntoArticle({ article }: { article: Omit<Article, 'markdown'> }) {
+export default function IntoArticle({ article }: { article: Omit<Article, 'markdown' | 'id'> }) {
     return <article className="intro_post p-blk-2 p-ln-2">
         <img className="post_image" src={article.image} alt="computer screen with code" width={350} />
         <div>
