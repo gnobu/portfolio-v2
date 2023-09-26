@@ -47,7 +47,7 @@ export default function ProjectPage() {
                 </div>
 
                 <div className="flex jst-btwn">
-                    <Link className='button outline flex gap-1 min-w r-4' to={project.link_url}>
+                    <Link className='button outline flex gap-1 min-w r-4' target='_blank' to={project.link_url}>
                         <span>view {project.link_type}</span>
                         <SvgText src={arrowTopRightIcon} srcCls='f-s-7' />
                     </Link>
