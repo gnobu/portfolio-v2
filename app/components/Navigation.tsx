@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { Link, useLocation } from '@remix-run/react'
 
-import { ThemeContext } from '~/hooks/useTheme'
+import { ThemeContext } from '~/hooks_contexts/useTheme'
 import { logo, moonIcon, sunIcon } from '~/assets/icons'
 import SvgText from './SvgText'
 import NavLinks from './NavLinks'

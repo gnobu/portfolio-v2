@@ -1,7 +1,5 @@
-import { useContext } from "react"
 import { LinksFunction, V2_MetaFunction } from "@remix-run/node"
 
-import { WindowSizeContext } from "~/hooks/useWindowSize"
 import { headshot } from '~/assets/images'
 import portfolioStyles from '~/styles/portfolio.css'
 import SvgText from "~/components/SvgText"

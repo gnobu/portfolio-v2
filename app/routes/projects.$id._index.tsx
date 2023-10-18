@@ -3,7 +3,7 @@ import { Link, useLoaderData, useRouteLoaderData } from '@remix-run/react'
 import { Project } from '@prisma/client'
 
 import SvgText from '~/components/SvgText'
-import useGoBack from '~/hooks/useGoBack'
+import useGoBack from '~/hooks_contexts/useGoBack'
 import { arrowLeftIcon, arrowTopRightIcon, editIcon } from '~/assets/icons'
 import Row from '~/components/Row'
 import { getProject } from '~/models/project.server'

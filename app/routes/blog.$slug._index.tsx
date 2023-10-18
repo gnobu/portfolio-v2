@@ -2,7 +2,7 @@ import { LoaderArgs, V2_MetaFunction, json, redirect } from '@remix-run/node'
 import { Link, useLoaderData } from '@remix-run/react'
 
 import { getArticle } from '~/models/blog.server'
-import useGoBack from '~/hooks/useGoBack'
+import useGoBack from '~/hooks_contexts/useGoBack'
 import markedWrapper from '~/utils/marked'
 import { arrowLeftIcon, editIcon } from '~/assets/icons'
 import SvgText from '~/components/SvgText'
