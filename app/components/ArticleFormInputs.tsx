@@ -13,7 +13,7 @@ export default function ArticleFormInputs({ errors, setIntro, setMarkdown, artic
     setMarkdown: React.Dispatch<React.SetStateAction<string>>,
     article?: Omit<Article, 'createdAt'>
 }) {
-    const inputClassName = `form-element`
+    const inputClassName = `form-element m-blk-2`
     return (<>
         <div className='form-group'>
             <label>

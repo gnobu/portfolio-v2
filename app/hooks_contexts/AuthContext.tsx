@@ -2,7 +2,7 @@ import { createContext } from "react"
 import { Role } from "~/sessions"
 
 export const AuthContext = createContext<{
-    role: Role | null,
+    role: Role,
 }>({
-    role: null,
+    role: Role.GUEST,
 })

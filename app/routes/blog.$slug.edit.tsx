@@ -44,10 +44,11 @@ export default function EditArticle() {
     const [markdown, setMarkdown] = useState(article?.markdown ?? '')
 
     return (
-        <div className='m-blk-7 container col'>
-            <main>
+        <main className="container m-blk-7">
+            <h2>Edit Blog Post</h2>
+            <div className='col'>
                 <Form method="post" className='plain flex-col gap-p5' encType="multipart/form-data">
-                    <input type="hidden" name="former_slug" value={slug} />
+                    <input className='form-element m-blk-2' type="hidden" name="former_slug" value={slug} />
                     <ArticleFormInputs article={article} errors={errors} setIntro={setIntro} setMarkdown={setMarkdown} />
                     <div className="flex gap-1 jst-btwn">
                         <Link to={'/blog'} className="button outline">Cancel</Link>
@@ -59,8 +60,8 @@ export default function EditArticle() {
                         </button>
                     </div>
                 </Form>
-            </main>
-            <MarkdownPreview intro={intro} markdown={markdown} />
-        </div>
+                <MarkdownPreview intro={intro} markdown={markdown} />
+            </div>
+        </main>
     )
 }

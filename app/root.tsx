@@ -14,7 +14,7 @@ import Navigation from "./components/Navigation"
 import useTheme, { ThemeContext } from "./hooks_contexts/useTheme"
 import useWindowSize, { WindowSizeContext } from "./hooks_contexts/useWindowSize"
 import { AuthContext } from "./hooks_contexts/AuthContext"
-import { getSession } from "./sessions"
+import { getSession, Role } from "./sessions"
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []), {
@@ -26,7 +26,7 @@ export const links: LinksFunction = () => [
 
 export async function loader({ request }: LoaderArgs) {
   const session = await getSession(request.headers.get('Cookie'))
-  return json({ role: session.get('role') ?? null })
+  return json({ role: session.get('role') ?? Role.GUEST })
 }
 
 export default function App() {

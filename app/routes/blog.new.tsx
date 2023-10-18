@@ -25,8 +25,9 @@ export default function NewBlog() {
     const [markdown, setMarkdown] = useState('')
 
     return (
-        <div className='m-blk-7 container col'>
-            <main>
+        <main className="container m-blk-7">
+            <h2>Create Blog Post</h2>
+            <div className='col'>
                 <Form method="post" className='plain flex-col gap-p5' encType="multipart/form-data">
                     <ArticleFormInputs errors={errors} setIntro={setIntro} setMarkdown={setMarkdown} />
                     <div className="flex gap-1">
@@ -36,8 +37,8 @@ export default function NewBlog() {
                         </button>
                     </div>
                 </Form>
-            </main>
-            <MarkdownPreview intro={intro} markdown={markdown} />
-        </div>
+                <MarkdownPreview intro={intro} markdown={markdown} />
+            </div>
+        </main>
     )
 }
