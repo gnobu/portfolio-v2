@@ -15,7 +15,7 @@ export default function Navigation() {
     const { role } = useContext(AuthContext)
     const [authLink, setAuthLink] = useState<Role | null>(null)
     function authEasterEgg(event: React.MouseEvent<HTMLElement, MouseEvent>) {
-        if (event.detail == 3) {
+        if (event.detail == 4) {
             if (!authLink) return setAuthLink(prev => role)
         }
         return setAuthLink(null)
