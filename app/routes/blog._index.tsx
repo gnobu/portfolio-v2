@@ -1,13 +1,15 @@
-import { Article } from "@prisma/client"
 import { json } from "@remix-run/node"
 import { Link, useLoaderData } from "@remix-run/react"
+import { useContext } from "react"
 import { plusIcon } from "~/assets/icons"
 
 import ArticleCard from "~/components/ArticleCard"
 import IntoArticle from "~/components/IntoArticle"
 import SvgText from "~/components/SvgText"
 import Tag from "~/components/Tag"
+import { AuthContext } from "~/hooks_contexts/AuthContext"
 import { getArticles } from "~/models/blog.server"
+import { Role } from "~/sessions"
 
 export async function loader() {
     const articles = await getArticles()
@@ -22,6 +24,7 @@ export async function loader() {
 export default function Blog() {
     const { articles, introArticle, error } = useLoaderData<typeof loader>()
     console.log(error)
+    const { role } = useContext(AuthContext)
 
     return (
         <main className="m-blk-7">
@@ -40,9 +43,12 @@ export default function Blog() {
                     return <ArticleCard key={article.slug} article={{ ...article, createdAt: new Date(article.createdAt) }} />
                 })}
             </section>
-            <aside className="container m-blk-6 flex jst-center">
-                <Link to={'new'} title='Add article' className='button outline small '><SvgText src={plusIcon} srcCls='f-s-8' /></Link>
-            </aside>
+            {role === Role.ADMIN
+                ? <aside className="container m-blk-6 flex jst-center">
+                    <Link to={'new'} title='Add article' className='button outline small '><SvgText src={plusIcon} srcCls='f-s-8' /></Link>
+                </aside>
+                : null
+            }
         </main>
     )
 }

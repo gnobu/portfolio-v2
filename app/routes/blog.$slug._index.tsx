@@ -6,6 +6,9 @@ import useGoBack from '~/hooks_contexts/useGoBack'
 import markedWrapper from '~/utils/marked'
 import { arrowLeftIcon, editIcon } from '~/assets/icons'
 import SvgText from '~/components/SvgText'
+import { AuthContext } from '~/hooks_contexts/AuthContext'
+import { useContext } from 'react'
+import { Role } from '~/sessions'
 
 
 export async function loader({ params }: LoaderArgs) {
@@ -26,6 +29,7 @@ export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
 export default function Article() {
     const { article } = useLoaderData<typeof loader>()
     const { goBack } = useGoBack()
+    const { role } = useContext(AuthContext)
 
     return (
         <div className="container m-blk-7">
@@ -33,7 +37,9 @@ export default function Article() {
                 <button title="Previous page" onClick={goBack} className="rounded small bg-sec p-blk-2 p-ln-2">
                     <SvgText src={arrowLeftIcon} srcCls="f-s-6" />
                 </button>
-                <Link to='edit' className='button small ghost'><SvgText src={editIcon} srcCls='f-s-6' /></Link>
+                {role === Role.ADMIN
+                    ? <Link to='edit' className='button small ghost'><SvgText src={editIcon} srcCls='f-s-6' /></Link>
+                    : null}
             </aside>
             <main className="">
                 <header className="intro_post p-blk-2 p-ln-2">

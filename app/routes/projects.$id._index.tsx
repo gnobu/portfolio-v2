@@ -8,6 +8,9 @@ import { arrowLeftIcon, arrowTopRightIcon, editIcon } from '~/assets/icons'
 import Row from '~/components/Row'
 import { getProject } from '~/models/project.server'
 import { projectImage } from '~/assets/images'
+import { useContext } from 'react'
+import { AuthContext } from '~/hooks_contexts/AuthContext'
+import { Role } from '~/sessions'
 
 export async function loader({ params }: LoaderArgs) {
     const { id } = params
@@ -21,13 +24,13 @@ export async function loader({ params }: LoaderArgs) {
 
 export default function ProjectPage() {
     const { project } = useLoaderData<typeof loader>()
-
+    const { role } = useContext(AuthContext)
     const { projectLinkTree } = useRouteLoaderData('routes/projects') as { projectLinkTree: { id: string, next: string }[] }
     const currentProject = projectLinkTree.find(proj => proj.id === project.id)
 
     const { goBack } = useGoBack()
     const rows = ['type', 'role', 'year', 'stack'] as Array<keyof Project>
-    
+
     return (<>
         <section className="container pos-rel">
             <button title="Previous page" onClick={goBack} className="project_prev rounded small bg-sec p-blk-2 p-ln-2">
@@ -51,7 +54,12 @@ export default function ProjectPage() {
                         <span>view {project.link_type}</span>
                         <SvgText src={arrowTopRightIcon} srcCls='f-s-7' />
                     </Link>
-                    <Link to='edit' className='button small ghost'><SvgText src={editIcon} srcCls='f-s-6' /></Link>
+                    {role === Role.ADMIN
+                        ? <Link to='edit' className='button small ghost'>
+                            <SvgText src={editIcon} srcCls='f-s-6' />
+                        </Link>
+                        : null
+                    }
                 </div>
             </div>
         </section>
