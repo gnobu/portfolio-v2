@@ -29,7 +29,7 @@ export async function getArticle(slug: string) {
     })
 }
 
-export async function createArticle(data: Omit<Article, 'createdAt'>) {
+export async function createArticle(data: Omit<Article, 'createdAt' | 'id'>) {
     return await prisma.article.create({
         data
     })
