@@ -8,9 +8,10 @@ import { processArticleData } from '~/utils/blog-action.server'
 import { createArticle } from '~/models/blog.server'
 import { isAdmin, getSession } from '~/sessions'
 
-export async function loader({request}:LoaderArgs) {
+export async function loader({ request }: LoaderArgs) {
     const session = await getSession(request.headers.get('Cookie'))
-    if(!isAdmin(session)) return redirect('/blog')
+    if (!isAdmin(session)) return redirect('/blog')
+    return null
 }
 
 export const action = async ({ request }: ActionArgs) => {

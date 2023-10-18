@@ -9,6 +9,7 @@ import { processProjectData } from '~/utils/project-action.server'
 export async function loader({request}:LoaderArgs) {
     const session = await getSession(request.headers.get('Cookie'))
     if(!isAdmin(session)) return redirect('/blog')
+    return null
 }
 
 export async function action({ request }: ActionArgs) {
