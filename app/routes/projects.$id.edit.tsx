@@ -5,10 +5,12 @@ import ProjectFormInputs from '~/components/ProjectFormInputs'
 import { deleteProject, getProject, updateProject } from '~/models/project.server'
 import { processProjectData } from '~/utils/project-action.server'
 import { Cloudinary } from '~/utils/cloudinary.server'
+import { isAdmin, getSession } from '~/sessions'
 
-export async function loader({ params }: LoaderArgs) {
+export async function loader({ params, request }: LoaderArgs) {
     const { id } = params
-    if (!id) return redirect('/projects')
+    const session = await getSession(request.headers.get('Cookie'))
+    if (!id || !isAdmin(session)) return redirect('/projects')
 
     const project = await getProject(id)
     if (!project) return redirect('/projects') // TODO: 404

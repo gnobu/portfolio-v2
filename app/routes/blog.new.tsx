@@ -1,11 +1,17 @@
 import { useState } from 'react'
-import { ActionArgs, json, redirect } from '@remix-run/node'
+import { ActionArgs, LoaderArgs, json, redirect } from '@remix-run/node'
 import { Form, Link, useActionData, useNavigation } from '@remix-run/react'
 
 import ArticleFormInputs from '~/components/ArticleFormInputs'
 import MarkdownPreview from '~/components/MarkdownPreview'
 import { processArticleData } from '~/utils/blog-action.server'
 import { createArticle } from '~/models/blog.server'
+import { isAdmin, getSession } from '~/sessions'
+
+export async function loader({request}:LoaderArgs) {
+    const session = await getSession(request.headers.get('Cookie'))
+    if(!isAdmin(session)) return redirect('/blog')
+}
 
 export const action = async ({ request }: ActionArgs) => {
     const { data, errors } = await processArticleData(request)

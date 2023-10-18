@@ -1,9 +1,15 @@
-import { ActionArgs, SerializeFrom, json, redirect } from '@remix-run/node'
+import { ActionArgs, LoaderArgs, SerializeFrom, json, redirect } from '@remix-run/node'
 import { Form, Link, useActionData, useNavigation } from '@remix-run/react'
 
 import ProjectFormInputs from '~/components/ProjectFormInputs'
 import { createProject } from '~/models/project.server'
+import { isAdmin, getSession } from '~/sessions'
 import { processProjectData } from '~/utils/project-action.server'
+
+export async function loader({request}:LoaderArgs) {
+    const session = await getSession(request.headers.get('Cookie'))
+    if(!isAdmin(session)) return redirect('/blog')
+}
 
 export async function action({ request }: ActionArgs) {
     const { data, errors } = await processProjectData(request)

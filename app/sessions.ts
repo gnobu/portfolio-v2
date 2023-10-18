@@ -1,5 +1,5 @@
 // app/sessions.ts
-import { createCookieSessionStorage } from "@remix-run/node"; // or cloudflare/deno
+import { Session, createCookieSessionStorage } from "@remix-run/node"; // or cloudflare/deno
 import invariant from "tiny-invariant";
 
 export enum Role {
@@ -35,4 +35,8 @@ const { getSession, commitSession, destroySession } =
         }
     );
 
-export { getSession, commitSession, destroySession };
+function isAdmin(session: Session<SessionData, SessionFlashData>) {
+    return session.get('role') === Role.ADMIN
+}
+
+export { getSession, commitSession, destroySession, isAdmin };

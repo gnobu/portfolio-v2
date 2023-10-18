@@ -7,10 +7,12 @@ import MarkdownPreview from '~/components/MarkdownPreview'
 import { processArticleData } from '~/utils/blog-action.server'
 import { deleteArticle, getArticle, updateArticle } from '~/models/blog.server'
 import { Cloudinary } from '~/utils/cloudinary.server'
+import { isAdmin, getSession } from '~/sessions'
 
-export async function loader({ params }: LoaderArgs) {
+export async function loader({ params, request }: LoaderArgs) {
     const { slug } = params
-    if (!slug) return redirect('/blog')
+    const session = await getSession(request.headers.get('Cookie'))
+    if (!slug || !isAdmin(session)) return redirect('/blog')
 
     const article = await getArticle(slug)
     if (!article) return redirect('/blog') // TODO: 404

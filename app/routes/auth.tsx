@@ -2,7 +2,7 @@ import type { ActionArgs, LoaderArgs } from "@remix-run/node"
 import { json, redirect } from "@remix-run/node"
 import { Form, useLoaderData } from "@remix-run/react"
 
-import { getSession, commitSession, Role } from "../sessions"
+import { getSession, commitSession, Role, isAdmin } from "../sessions"
 import { validateCredentials } from "~/utils/auth.server"
 import invariant from "tiny-invariant"
 
@@ -12,7 +12,7 @@ export async function loader({
     const session = await getSession(
         request.headers.get("Cookie")
     )
-    if (session.get("role") === Role.ADMIN) {
+    if (isAdmin(session)) {
         return redirect("/", {
             headers: {
                 "Set-Cookie": await commitSession(session),
